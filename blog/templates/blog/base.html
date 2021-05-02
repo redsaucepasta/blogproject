@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>Blog</title>
+
+  <!-- BOOTSTRAP -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+  <!-- MEDIUM EDITOR -->
+  <script src="//cdn.jsdelivr.net/npm/medium-editor@latest/dist/js/medium-editor.min.js"></script>
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/medium-editor@latest/dist/css/medium-editor.min.css" type="text/css" media="screen" charset="utf-8">
+
+  <!-- CUSTOM CSS -->
+  <link rel="stylesheet" href="{% static 'css/blog.css'%}">
+
+  <!-- FONTS -->
+  <link href="https://fonts.googleapis.com/css2?family=Major+Mono+Display&family=Raleway&display=swap" rel="stylesheet">
+
+  <!-- BOOTSTRAP 3 -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+
+</head>
+
+<body>
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark techfont">
+    <div class="container">
+      <ul class="navbar-nav">
+        <li class="nav-item"><a class="navbar-brand" href="{% url 'post_list' %}">Blog</a></li>
+        <!-- <li class="nav-item"><a class="nav-link" href="{% url 'about' %}">About</a></li> -->
+        <!-- <li class="nav-item"><a class="nav-link" href="https://www.github.com">GitHub</a></li>
+        <li class="nav-item"><a class="nav-link" href="https://www.linkedin.com">LinkedIn</a></li> -->
+      </ul>
+      <ul class="navbar-nav ml-auto">
+        {% if user.is_authenticated %}
+        <li class="nav-item"><a class="nav-link" href="{% url 'about' %}">About</a></li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'post_new' %}">New Post</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'post_draft_list' %}">Drafts</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'logout' %}"><span class="glyphicon glyphicon-log-out"></span></a>
+        </li>
+        <!-- <li class="nav-item">
+          <a class="nav-link">Welcome {{ user.username }}!</a>
+        </li> -->
+        {% else %}
+        <li class="nav-item"><a class="nav-link" href="{% url 'about' %}">About</a></li>
+        <li class="nav-item">
+          <a a class="nav-link" href="{% url 'login' %}"><span class="glyphicon glyphicon-user"></span></a>
+        </li>
+        {% endif %}
+      </ul>
+    </div>
+  </nav>
+
+  <div class="container ">
+    <!-- <div class="jumbotron"> -->
+    <div class="row">
+      <div class="col-md-8">
+        {% block content %}
+        {% endblock %}
+      </div>
+    </div>
+  </div>
+  </div>
+
+</body>
+
+</html>
